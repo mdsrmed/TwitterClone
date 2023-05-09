@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     private let timelineTableView: UITableView = {
         
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TweetTableViewCell.self, forCellReuseIdentifier: TweetTableViewCell.identifier)
         
         return tableView
         
@@ -38,13 +38,19 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+         return 10
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for:indexPath)
-        cell.textLabel?.text = "Tweet"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for:indexPath) as? TweetTableViewCell else{
+            return UITableViewCell()
+        }
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
 }
