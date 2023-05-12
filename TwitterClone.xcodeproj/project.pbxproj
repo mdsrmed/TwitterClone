@@ -16,6 +16,7 @@
 		218E10162A0983140056C2C6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218E10152A0983140056C2C6 /* SearchViewController.swift */; };
 		218E10182A0983360056C2C6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218E10172A0983360056C2C6 /* NotificationsViewController.swift */; };
 		218E101A2A0983550056C2C6 /* DirectMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218E10192A0983550056C2C6 /* DirectMessagesViewController.swift */; };
+		2191E5972A0DAEE200BA8851 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */; };
 		21972B312A09B75B0036DAD8 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21972B302A09B75B0036DAD8 /* TweetTableViewCell.swift */; };
 		219CCCB42A0AE35400686FA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CCCB32A0AE35400686FA4 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		218E10152A0983140056C2C6 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		218E10172A0983360056C2C6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		218E10192A0983550056C2C6 /* DirectMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessagesViewController.swift; sourceTree = "<group>"; };
+		2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		21972B302A09B75B0036DAD8 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		219CCCB32A0AE35400686FA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				21972B302A09B75B0036DAD8 /* TweetTableViewCell.swift */,
+				2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				218E10142A0982D60056C2C6 /* HomeViewController.swift in Sources */,
 				219CCCB42A0AE35400686FA4 /* ProfileViewController.swift in Sources */,
 				218E101A2A0983550056C2C6 /* DirectMessagesViewController.swift in Sources */,
+				2191E5972A0DAEE200BA8851 /* ProfileTableViewHeader.swift in Sources */,
 				21972B312A09B75B0036DAD8 /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
