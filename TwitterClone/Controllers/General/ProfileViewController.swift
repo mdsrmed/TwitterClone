@@ -9,6 +9,15 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    private var isStatusBarHidden: Bool = true
+    
+    private let statusBar: UIView = {
+       let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor =  .systemBackground
+        view.layer.opacity = 0
+        return view
+    }()
     
     
     private let profileTableView:UITableView = {
@@ -26,10 +35,13 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.title = "Profile"
         view.addSubview(profileTableView)
+        view.addSubview(statusBar)
         let headerView = ProfileTableViewHeader(frame: CGRect(x: 0, y: 0, width: profileTableView.frame.width, height: 380))
         profileTableView.delegate = self
         profileTableView.dataSource = self
         profileTableView.tableHeaderView = headerView
+        profileTableView.contentInsetAdjustmentBehavior = .never
+        navigationController?.navigationBar.isHidden = true
         configureConstraints()
     }
     
@@ -44,7 +56,16 @@ class ProfileViewController: UIViewController {
             profileTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
+        let statusBarConstraints = [
+        
+            statusBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBar.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            statusBar.heightAnchor.constraint(equalToConstant: view.bounds.height > 800 ? 40 : 20)
+        ]
+        
         NSLayoutConstraint.activate(profileTableViewConstraints)
+        NSLayoutConstraint.activate(statusBarConstraints)
     }
     
 
@@ -65,5 +86,23 @@ extension ProfileViewController: UITableViewDelegate,UITableViewDataSource{
         }
         
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yPosition = scrollView.contentOffset.y
+        
+        if yPosition > 150 && isStatusBarHidden {
+            isStatusBarHidden = false
+            UIView.animate(withDuration: 0.3, delay: 0,options: .curveLinear) {[weak self] in
+                
+                self?.statusBar.layer.opacity = 1
+            }
+        }else if yPosition < 0 && !isStatusBarHidden {
+            UIView.animate(withDuration: 0.3, delay: 0,options: .curveLinear) {[weak self] in
+                
+                self?.statusBar.layer.opacity = 0
+                
+            }
+        }
     }
 }

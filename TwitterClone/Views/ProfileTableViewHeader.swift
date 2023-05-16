@@ -9,13 +9,41 @@ import UIKit
 
 class ProfileTableViewHeader: UIView {
     
+    
+    private let followersContLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "313"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        return label
+    }()
+    
+    private let followingTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Following"
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+     
+    
+    private let followingCountLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "9786"
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        return label
+    }()
+    
     private let joinDateLabel: UILabel = {
-       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Joined July 2021"
         label.textColor = .secondaryLabel
-        label.font = .systemFont(ofSize: 14, weight: <#T##UIFont.Weight#>)
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     
@@ -29,7 +57,6 @@ class ProfileTableViewHeader: UIView {
     }()
     
     private let userBioLabel: UILabel = {
-       
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 3
@@ -60,7 +87,6 @@ class ProfileTableViewHeader: UIView {
     }()
     
     private let profileAvatarImageView: UIImageView = {
-        
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
@@ -90,6 +116,8 @@ class ProfileTableViewHeader: UIView {
         addSubview(userBioLabel)
         addSubview(joinDateImageView)
         addSubview(joinDateLabel)
+        addSubview(followingCountLabel)
+        addSubview(followersContLabel)
         configureConstraints()
         
         
@@ -103,16 +131,14 @@ class ProfileTableViewHeader: UIView {
     private func configureConstraints(){
         
         let profileHeaderImageViewConstraints = [
-            
             profileHeaderImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileHeaderImageView.topAnchor.constraint(equalTo: topAnchor),
             profileHeaderImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            profileHeaderImageView.heightAnchor.constraint(equalToConstant: 180)
+            profileHeaderImageView.heightAnchor.constraint(equalToConstant: 150)
         ]
         
         
         let profileAvatarImageViewConstraints = [
-            
             profileAvatarImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             profileAvatarImageView.centerYAnchor.constraint(equalTo: profileAvatarImageView.bottomAnchor,constant: 10),
             profileHeaderImageView.widthAnchor.constraint(equalToConstant: 80),
@@ -131,7 +157,6 @@ class ProfileTableViewHeader: UIView {
         ]
         
         let userBioLabelConstraints = [
-        
             userBioLabel.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
             userBioLabel.trailingAnchor.constraint(equalTo:trailingAnchor , constant: -5),
             userBioLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 5)
@@ -140,14 +165,12 @@ class ProfileTableViewHeader: UIView {
         ]
         
         let joinDateImageViewConstraints = [
-        
             joinDateImageView.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
             joinDateImageView.topAnchor.constraint(equalTo: userBioLabel.bottomAnchor, constant: 5)
         
         ]
         
         let joinDateLabelConstraints = [
-        
             joinDateLabel.leadingAnchor.constraint(equalTo: joinDateImageView.trailingAnchor,constant: 2),
             joinDateLabel.bottomAnchor.constraint(equalTo: joinDateImageView.bottomAnchor),
             
