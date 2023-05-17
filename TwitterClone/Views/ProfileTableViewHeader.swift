@@ -10,6 +10,65 @@ import UIKit
 class ProfileTableViewHeader: UIView {
     
     
+    private enum SecrtionTabs: String {
+        case tweets = "Tweets"
+        case tweetsAndReplies = "Tweets & Replies"
+        case media = "Media"
+        case likes = "Likes"
+        
+        
+        var index: Int {
+            switch self {
+            case .tweets:
+                return 0
+                
+            case .tweetsAndReplies:
+                return 1
+                
+            case .media:
+                return 2
+                
+            case .likes:
+                return 3
+            }
+        }
+    }
+    
+    private var selectedTab: Int = 0{
+        didSet{
+            print(selectedTab)
+        }
+    }
+    
+    private var tabs: [UIButton] = ["Tweets","Tweets & Replies","Media","Likes"]
+        .map{ buttonTitle in
+            let button = UIButton(type: .system)
+            button.setTitle(buttonTitle, for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+            button.tintColor = .label
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }
+    
+    private lazy  var sectionStack: UIStackView = {
+      let stackView = UIStackView(arrangedSubviews: tabs)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .equalSpacing
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    private let followersTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Followers"
+        label.textColor = .secondaryLabel
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        return label
+    }()
+    
+    
     private let followersContLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -118,8 +177,42 @@ class ProfileTableViewHeader: UIView {
         addSubview(joinDateLabel)
         addSubview(followingCountLabel)
         addSubview(followersContLabel)
+        addSubview(followingTextLabel)
+        addSubview(followersContLabel)
+        addSubview(followingTextLabel)
+        addSubview(sectionStack)
         configureConstraints()
+        configureStackButton()
         
+        
+    }
+    
+    
+    private func configureStackButton(){
+        for (_, button) in sectionStack.arrangedSubviews.enumerated(){
+            guard let button = button as? UIButton else{return}
+            button.addTarget(self, action: #selector(didTapTab(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc private func didTapTab(_ sender: UIButton){
+        
+        guard let label = sender.titleLabel?.text else { return}
+        
+        switch label {
+        case SecrtionTabs.tweets.rawValue:
+            selectedTab = 0
+        case SecrtionTabs.tweetsAndReplies.rawValue:
+            selectedTab = 1
+        case SecrtionTabs.media.rawValue:
+            selectedTab = 2
+        case SecrtionTabs.likes.rawValue:
+            selectedTab = 3
+            
+        default:
+            selectedTab = 0
+        
+        }
         
     }
     
@@ -176,6 +269,37 @@ class ProfileTableViewHeader: UIView {
             
         ]
         
+        let followingCountLabelConstraints = [
+            followingCountLabel.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
+            followingCountLabel.topAnchor.constraint(equalTo: joinDateLabel.bottomAnchor,constant: 10)
+            
+        ]
+        
+        let followingTextLabelConstraints = [
+            followingTextLabel.leadingAnchor.constraint(equalTo: followingCountLabel.trailingAnchor,constant: 4),
+            followingTextLabel.bottomAnchor.constraint(equalTo: followingCountLabel.bottomAnchor)
+        ]
+        
+        let followersCountLabelConstraints = [
+        
+            followersContLabel.leadingAnchor.constraint(equalTo: followingTextLabel.trailingAnchor,constant: 8),
+            followersContLabel.bottomAnchor.constraint(equalTo: followingCountLabel.bottomAnchor)
+        ]
+        
+        let followersTextLabelConstraints = [
+            followersTextLabel.leadingAnchor.constraint(equalTo: followersContLabel.trailingAnchor,constant: 4),
+            followersTextLabel.bottomAnchor.constraint(equalTo: followingCountLabel.bottomAnchor)
+        ]
+        
+        let sectionStackConstraints = [
+            sectionStack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 25),
+            sectionStack.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -25),
+            sectionStack.topAnchor.constraint(equalTo: followingCountLabel.bottomAnchor,constant: 5),
+            sectionStack.heightAnchor.constraint(equalToConstant: 35)
+        ]
+        
+        
+        
         NSLayoutConstraint.activate(profileHeaderImageViewConstraints)
         NSLayoutConstraint.activate(profileAvatarImageViewConstraints)
         NSLayoutConstraint.activate(displayNameLabelConstraints)
@@ -183,5 +307,10 @@ class ProfileTableViewHeader: UIView {
         NSLayoutConstraint.activate(userBioLabelConstraints)
         NSLayoutConstraint.activate(joinDateImageViewConstraints)
         NSLayoutConstraint.activate(joinDateLabelConstraints)
+        NSLayoutConstraint.activate(followingCountLabelConstraints)
+        NSLayoutConstraint.activate(followingTextLabelConstraints)
+        NSLayoutConstraint.activate(followersCountLabelConstraints)
+        NSLayoutConstraint.activate(followingTextLabelConstraints)
+        NSLayoutConstraint.activate(sectionStackConstraints)
     }
 }
