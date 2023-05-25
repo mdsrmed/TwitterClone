@@ -19,6 +19,8 @@
 		2191E5972A0DAEE200BA8851 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */; };
 		2192D20F2A1D3BC900779672 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192D20E2A1D3BC900779672 /* OnboardingViewController.swift */; };
 		2192D2112A1D46E800779672 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192D2102A1D46E800779672 /* RegisterViewController.swift */; };
+		219539942A2008CF0047C74E /* RegisterViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219539932A2008CF0047C74E /* RegisterViewViewModel.swift */; };
+		219539972A201A630047C74E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219539962A201A630047C74E /* AuthManager.swift */; };
 		21972B312A09B75B0036DAD8 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21972B302A09B75B0036DAD8 /* TweetTableViewCell.swift */; };
 		219CCCB42A0AE35400686FA4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219CCCB32A0AE35400686FA4 /* ProfileViewController.swift */; };
 		21E88D0C2A1AB7DD002055F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21E88D0B2A1AB7DD002055F6 /* GoogleService-Info.plist */; };
@@ -48,6 +50,8 @@
 		2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
 		2192D20E2A1D3BC900779672 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2192D2102A1D46E800779672 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		219539932A2008CF0047C74E /* RegisterViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewViewModel.swift; sourceTree = "<group>"; };
+		219539962A201A630047C74E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		21972B302A09B75B0036DAD8 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		219CCCB32A0AE35400686FA4 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		21E88D0B2A1AB7DD002055F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -92,6 +96,8 @@
 		218291072A087F3200F9B22A /* TwitterClone */ = {
 			isa = PBXGroup;
 			children = (
+				219539952A201A1B0047C74E /* Networking */,
+				219539912A2008810047C74E /* ViewModels */,
 				21972B2F2A09B70A0036DAD8 /* Views */,
 				218E10112A0982250056C2C6 /* Controllers */,
 				218291082A087F3200F9B22A /* AppDelegate.swift */,
@@ -133,6 +139,22 @@
 				2192D2102A1D46E800779672 /* RegisterViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		219539912A2008810047C74E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				219539932A2008CF0047C74E /* RegisterViewViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		219539952A201A1B0047C74E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				219539962A201A630047C74E /* AuthManager.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		21972B2F2A09B70A0036DAD8 /* Views */ = {
@@ -238,12 +260,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				218E10162A0983140056C2C6 /* SearchViewController.swift in Sources */,
+				219539972A201A630047C74E /* AuthManager.swift in Sources */,
 				2182910D2A087F3200F9B22A /* MainTabbarViewController.swift in Sources */,
 				218291092A087F3200F9B22A /* AppDelegate.swift in Sources */,
 				2192D2112A1D46E800779672 /* RegisterViewController.swift in Sources */,
 				218E10182A0983360056C2C6 /* NotificationsViewController.swift in Sources */,
 				2182910B2A087F3200F9B22A /* SceneDelegate.swift in Sources */,
 				218E10142A0982D60056C2C6 /* HomeViewController.swift in Sources */,
+				219539942A2008CF0047C74E /* RegisterViewViewModel.swift in Sources */,
 				219CCCB42A0AE35400686FA4 /* ProfileViewController.swift in Sources */,
 				218E101A2A0983550056C2C6 /* DirectMessagesViewController.swift in Sources */,
 				2191E5972A0DAEE200BA8851 /* ProfileTableViewHeader.swift in Sources */,

@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class RegisterViewController: UIViewController {
+    
+    private var vm = RegisterViewViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
     
     private let registerTitleLabel: UILabel = {
         let label = UILabel()
@@ -48,8 +52,42 @@ class RegisterViewController: UIViewController {
         button.backgroundColor = UIColor(red: 29/255, green: 161/255, blue: 242/255, alpha: 1)
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 25
+        button.isEnabled = false
         return button
     }()
+    
+    @objc private func didChangeEmailField(){
+        vm.email = emailTextField.text
+        vm.validateRegistrationForm()
+        
+    }
+     
+    @objc private func didChangePasswordField(){
+        vm.password = passwordTextField.text
+        vm.validateRegistrationForm()
+    }
+    private func bindViews(){
+        emailTextField.addTarget(self, action:#selector(didChangeEmailField), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(didChangePasswordField), for: .editingChanged)
+        vm.$isRegistrationFormValid.sink{[weak self] validationState in
+            self?.registerButton.isEnabled = validationState
+            }
+        .store(in: &subscriptions)
+        
+        vm.$user.sink{ [weak self] user in
+            print(user)
+        }
+        .store(in: &subscriptions)
+    }
+    
+    @objc private func didTapToDismiss(){
+        view.endEditing(true)
+    }
+    
+    @objc private func didTapRegister(){
+        vm.createUser()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +96,15 @@ class RegisterViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(registerButton)
+        registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
         
         configureConstraints()
-        
+        view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        bindViews()
         
     }
+    
+    
     
     private func configureConstraints(){
         
