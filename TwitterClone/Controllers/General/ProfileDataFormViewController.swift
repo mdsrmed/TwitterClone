@@ -7,8 +7,12 @@
 
 import UIKit
 import PhotosUI
+import Combine
 
 class ProfileDataFormViewController: UIViewController {
+    
+     private let pvm = ProfileDataFormViewViewModel()
+     private var subscription: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -112,8 +116,35 @@ class ProfileDataFormViewController: UIViewController {
         view.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         isModalInPresentation = true
         avatarPlaceholderImageView.addGestureRecognizer(UIGestureRecognizer(target: self, action: #selector(didTapToUpload)))
+        submitButton.addTarget(self, action: #selector(didTapSubmit), for: .touchUpInside)
         
         configureConstraints()
+        bindViews()
+    }
+    
+    @objc private func didTapSubmit(){
+        pvm.uploadAvatar()
+    }
+    
+    private func bindViews(){
+        displayNameTextField.addTarget(self, action: #selector(didUpdateDisplayName), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(didUpdateUsername), for: .editingChanged)
+        pvm.$isFormValid.sink { [weak self] buttonState in
+            self?.submitButton.isEnabled = buttonState
+        }
+        .store(in: &subscription)
+    }
+    
+    
+    
+    @objc private func didUpdateDisplayName(){
+        pvm.displayName = displayNameTextField.text
+        pvm.validateUserProfileForm()
+    }
+    
+    @objc private func didUpdateUsername(){
+        pvm.username = usernameTextField.text
+        pvm.validateUserProfileForm()
     }
     
     @objc private func didTapToUpload(){
@@ -209,6 +240,10 @@ extension  ProfileDataFormViewController: UITextViewDelegate,UITextFieldDelegate
         
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        pvm.bio = textView.text
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         scrollView.setContentOffset(CGPoint(x: 0,y: textField.frame.origin.y - 100), animated: true)
     }
@@ -227,6 +262,8 @@ extension ProfileDataFormViewController: PHPickerViewControllerDelegate {
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
                         self? .avatarPlaceholderImageView.image = image
+                        self? .pvm.imageData = image
+                        self? .pvm.validateUserProfileForm()
                     }
                 }
                 
