@@ -90,10 +90,10 @@ class ProfileTableViewHeader: UIView {
     }()
     
     
-    private let followersContLabel: UILabel = {
+    var followersContLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "313"
+        //label.text = "313"
         label.textColor = .label
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
@@ -109,16 +109,16 @@ class ProfileTableViewHeader: UIView {
     }()
      
     
-    private let followingCountLabel: UILabel = {
+    var followingCountLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "9786"
+        //label.text = "9786"
         label.textColor = .label
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
     
-    private let joinDateLabel: UILabel = {
+    var joinDateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Joined July 2021"
@@ -136,43 +136,44 @@ class ProfileTableViewHeader: UIView {
         return imageView
     }()
     
-    private let userBioLabel: UILabel = {
+    var userBioLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 3
         label.textColor = .label
-        label.text = "IOS and WEB developer"
+        //label.text = "IOS and WEB developer"
         return label
         
     }()
     
-    private let usernameLabel: UILabel = {
+    var  usernameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "@rms25d"
+        //label.text = "@rms25d"
         label.font = .systemFont(ofSize: 18)
         label.textColor = .secondaryLabel
         return label
         
     }()
     
-    private let displayNameLabel: UILabel = {
+    var  displayNameLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "msr"
+        //label.text = "msr"
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.textColor = .label
         
         return label
     }()
     
-    private let profileAvatarImageView: UIImageView = {
+    var  profileAvatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 40
-        imageView.image = UIImage(named: "avatar")
-        imageView.backgroundColor = .systemBackground
+        imageView.contentMode = .scaleAspectFill
+        //imageView.image = UIImage(named: "avatar")
+        //imageView.backgroundColor = .systemBackground
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

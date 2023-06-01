@@ -12,7 +12,7 @@ import Combine
 class ProfileDataFormViewController: UIViewController {
     
      private let pvm = ProfileDataFormViewViewModel()
-     private var subscription: Set<AnyCancellable> = []
+     private var subscriptions: Set<AnyCancellable> = []
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -132,7 +132,15 @@ class ProfileDataFormViewController: UIViewController {
         pvm.$isFormValid.sink { [weak self] buttonState in
             self?.submitButton.isEnabled = buttonState
         }
-        .store(in: &subscription)
+        .store(in: &subscriptions)
+        
+        pvm.$isOnboardingFinished.sink { [weak self] state in
+            if state {
+                self?.dismiss(animated: true)
+            }
+            
+        }
+        .store(in: &subscriptions)
     }
     
     
@@ -242,6 +250,7 @@ extension  ProfileDataFormViewController: UITextViewDelegate,UITextFieldDelegate
     
     func textViewDidChange(_ textView: UITextView) {
         pvm.bio = textView.text
+        pvm.validateUserProfileForm()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

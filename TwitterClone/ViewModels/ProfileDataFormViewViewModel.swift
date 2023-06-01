@@ -20,7 +20,8 @@ final class ProfileDataFormViewViewModel: ObservableObject {
     @Published var imageData: UIImage?
     @Published var isFormValid: Bool = false
     @Published var error: String = ""
-    @Published var url: URL?
+    @Published var isOnboardingFinished:Bool = false
+    
     
     private var subscriptions: Set<AnyCancellable> = []
     
@@ -51,12 +52,46 @@ final class ProfileDataFormViewViewModel: ObservableObject {
                 StorageManager.shared.getDownloadURL(for: metaData.path)
             })
             .sink { [weak self] completion in
+                
+                switch completion {
+                case .failure(let error):
+                    self?.error = error.localizedDescription
+                    
+                case .finished:
+                    self?.updateUserData()
+                    
+            }
+            } receiveValue: { [weak self] url  in
+                self?.avatarPath = url.absoluteString
+            }
+            .store(in: &subscriptions)
+    }
+    
+    private func updateUserData(){
+        guard let displayName,
+              let username,
+              let bio,
+              let avatarPath,
+              let id = Auth.auth().currentUser?.uid
+        else {return}
+        
+        let updateFields: [String:Any] = [
+            "displayName":displayName,
+            "username": username,
+            "bio": bio,
+            "avatarPath": avatarPath,
+            "isUserOnboarded": true
+        ]
+        
+        DatabaseManager.shared.collectionUsers(updateFields: updateFields, for: id)
+            .sink { [weak self] completion in
                 if case .failure(let error) = completion{
                     self?.error = error.localizedDescription
                 }
-            } receiveValue: { [weak self] url  in
-                self?.url = url
+            } receiveValue: { [weak self] onboardingState in
+                self?.isOnboardingFinished = onboardingState
             }
             .store(in: &subscriptions)
+
     }
 }
