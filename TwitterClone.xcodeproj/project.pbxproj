@@ -17,6 +17,8 @@
 		218E10182A0983360056C2C6 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218E10172A0983360056C2C6 /* NotificationsViewController.swift */; };
 		218E101A2A0983550056C2C6 /* DirectMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218E10192A0983550056C2C6 /* DirectMessagesViewController.swift */; };
 		2191E5972A0DAEE200BA8851 /* ProfileTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */; };
+		2192A3E02A2E2B8B0097464D /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A3DF2A2E2B8B0097464D /* Tweet.swift */; };
+		2192A3E22A2E2D450097464D /* TweetComposeViewVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A3E12A2E2D450097464D /* TweetComposeViewVIewModel.swift */; };
 		2192D20F2A1D3BC900779672 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192D20E2A1D3BC900779672 /* OnboardingViewController.swift */; };
 		2192D2112A1D46E800779672 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192D2102A1D46E800779672 /* RegisterViewController.swift */; };
 		2193ADFF2A252BD400005369 /* TwitterUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2193ADFE2A252BD400005369 /* TwitterUser.swift */; };
@@ -59,6 +61,8 @@
 		218E10172A0983360056C2C6 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		218E10192A0983550056C2C6 /* DirectMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectMessagesViewController.swift; sourceTree = "<group>"; };
 		2191E5962A0DAEE200BA8851 /* ProfileTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewHeader.swift; sourceTree = "<group>"; };
+		2192A3DF2A2E2B8B0097464D /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		2192A3E12A2E2D450097464D /* TweetComposeViewVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetComposeViewVIewModel.swift; sourceTree = "<group>"; };
 		2192D20E2A1D3BC900779672 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		2192D2102A1D46E800779672 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		2193ADFE2A252BD400005369 /* TwitterUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterUser.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				2193ADFE2A252BD400005369 /* TwitterUser.swift */,
+				2192A3DF2A2E2B8B0097464D /* Tweet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				2193AE022A25364F00005369 /* HomeViewViewModel.swift */,
 				2193AE062A25422500005369 /* ProfileDataFormViewViewModel.swift */,
 				21B339ED2A28155500FF448C /* ProfileViewViewModel.swift */,
+				2192A3E12A2E2D450097464D /* TweetComposeViewVIewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2192A3E22A2E2D450097464D /* TweetComposeViewVIewModel.swift in Sources */,
 				218E10162A0983140056C2C6 /* SearchViewController.swift in Sources */,
 				219539972A201A630047C74E /* AuthManager.swift in Sources */,
 				2197CCF42A2D206900DC6B1E /* TweetComposeViewController.swift in Sources */,
@@ -328,6 +335,7 @@
 				21B339EE2A28155500FF448C /* ProfileViewViewModel.swift in Sources */,
 				2192D2112A1D46E800779672 /* RegisterViewController.swift in Sources */,
 				218E10182A0983360056C2C6 /* NotificationsViewController.swift in Sources */,
+				2192A3E02A2E2B8B0097464D /* Tweet.swift in Sources */,
 				2193AE072A25422500005369 /* ProfileDataFormViewViewModel.swift in Sources */,
 				2182910B2A087F3200F9B22A /* SceneDelegate.swift in Sources */,
 				218E10142A0982D60056C2C6 /* HomeViewController.swift in Sources */,

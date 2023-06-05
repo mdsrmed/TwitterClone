@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 class TweetComposeViewController: UIViewController {
+    
+    private var tcvm = TweetComposeViewViewModel()
+    private var subscriptions: Set<AnyCancellable> = []
+    
     
     private let tweetButton: UIButton = {
         let button = UIButton(type: .system)
@@ -16,7 +21,10 @@ class TweetComposeViewController: UIViewController {
         button.setTitle("Tweet", for: .normal)
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
+        button.isEnabled = false
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.white.withAlphaComponent(0.7), for: .disabled)
         return button
     }()
     
@@ -42,6 +50,35 @@ class TweetComposeViewController: UIViewController {
         title = "Tweet"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancel))
         configuerConstraints()
+        bindViews()
+        tweetButton.addTarget(self, action: #selector(didTapToTweet), for: .touchUpInside)
+    }
+    
+    @objc private func didTapToTweet(){
+        tcvm.dispatchTweet()
+    }
+    
+    private func bindViews(){
+        tcvm.$isValidToTweet.sink { [weak self] state in
+            self?.tweetButton.isEnabled = state
+        }
+        .store(in: &subscriptions)
+        
+        tcvm.$shouldDismissComposer.sink {[weak self] success in
+            if success {
+                self?.dismiss(animated: true)
+            }
+            
+            
+        }
+        .store(in: &subscriptions)
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tcvm.getUserData()
     }
     
     private func configuerConstraints(){
@@ -83,6 +120,11 @@ extension TweetComposeViewController: UITextViewDelegate {
             textView.textColor = .gray
             }
         
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        tcvm.tweetContent = textView.text
+        tcvm.validateToTweet()
     }
     
 }
