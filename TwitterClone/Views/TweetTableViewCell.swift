@@ -13,8 +13,6 @@ protocol TweetTableViewCellDelegate: AnyObject {
     func tweetTableViewCellDidTapRetweet()
     func tweetTableViewCellDidTapLike()
     func tweetTableViewCellDidTapShare()
-    
-    
 }
 
 
