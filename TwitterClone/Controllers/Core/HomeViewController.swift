@@ -157,7 +157,7 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource{
             return UITableViewCell()
         }
         let tweetModel = hvm.tweets[indexPath.row]
-        cell.confiugeTweets(with: tweetModel.author.displayName,
+        cell.configureTweets(with: tweetModel.author.displayName,
                             username: tweetModel.author.username,
                             tweetTextContent:tweetModel.tweetContent,
                             avatarPath: tweetModel.author.avatarPath)

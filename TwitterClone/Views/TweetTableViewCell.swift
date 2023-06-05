@@ -130,10 +130,10 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     func configureTweets(with displayName: String,username: String,tweetTextContent: String,avatarPath: String){
-        displayName.text = displayName
+        displayNameLabel.text = displayName
         userNameLabel.text = "@\(username)"
         tweetTextContentLabel.text = tweetTextContent
-        avatarImageView.sd_setImage(with: URL(string: avatarPath)
+        avatarImageView.sd_setImage(with: URL(string: avatarPath))
     }
     
     @objc private func didTapReply(){
