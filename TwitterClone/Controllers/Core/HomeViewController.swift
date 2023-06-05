@@ -12,7 +12,7 @@ import Combine
 class HomeViewController: UIViewController {
     
     private var hvm = HomeViewViewModel()
-    private var subscription: Set<AnyCancellable> = []
+    private var subscriptions: Set<AnyCancellable> = []
     
     private lazy var  composeTweetButton: UIButton = {
         let button = UIButton(type: .system, primaryAction: UIAction { [weak self] _ in
@@ -133,13 +133,22 @@ class HomeViewController: UIViewController {
                 self?.completeUserOnboarding()
             }
         }
-        .store(in: &subscription)
+        .store(in: &subscriptions)
+        
+        hvm.$tweets.sink { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.timelineTableView.reloadData()
+                
+            }
+            
+        }
+        .store(in: &subscriptions)
     }
 }
 
 extension HomeViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return 10
+        return hvm.tweets.count
     }
     
     
@@ -147,8 +156,11 @@ extension HomeViewController: UITableViewDelegate,UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TweetTableViewCell.identifier, for:indexPath) as? TweetTableViewCell else{
             return UITableViewCell()
         }
-         
-        
+        let tweetModel = hvm.tweets[indexPath.row]
+        cell.confiugeTweets(with: tweetModel.author.displayName,
+                            username: tweetModel.author.username,
+                            tweetTextContent:tweetModel.tweetContent,
+                            avatarPath: tweetModel.author.avatarPath)
         cell.delegate = self
         return cell
     }

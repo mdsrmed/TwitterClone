@@ -36,7 +36,7 @@ class TweetTableViewCell: UITableViewCell {
         imageView.layer.cornerRadius = 25
         imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
-        imageView.image = UIImage(systemName: "person")
+        //imageView.image = UIImage(systemName: "person")
         imageView.backgroundColor = .green
         return imageView
     }()
@@ -45,7 +45,7 @@ class TweetTableViewCell: UITableViewCell {
     private let displayNameLabel: UILabel = {
          
         let label = UILabel()
-        label.text = "shahid"
+        //label.text = "shahid"
         label.font = .systemFont(ofSize: 18,weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -54,7 +54,7 @@ class TweetTableViewCell: UITableViewCell {
     private let userNameLabel: UILabel = {
         
         let label = UILabel()
-        label.text = "@msr"
+        //label.text = "@msr"
         label.textColor = .secondaryLabel
         label.font = .systemFont(ofSize:16, weight:.bold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class TweetTableViewCell: UITableViewCell {
     private let tweetTextContentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "This is test tweet"
+        //label.text = "This is test tweet"
         label.numberOfLines = 0
         return label
     }()
@@ -129,6 +129,13 @@ class TweetTableViewCell: UITableViewCell {
         retweetButton.addTarget(self, action: #selector(didTapRetweet), for: .touchUpInside)
         likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         shareButton.addTarget(self, action:#selector(didTapShare), for: .touchUpInside)
+    }
+    
+    func configureTweets(with displayName: String,username: String,tweetTextContent: String,avatarPath: String){
+        displayName.text = displayName
+        userNameLabel.text = "@\(username)"
+        tweetTextContentLabel.text = tweetTextContent
+        avatarImageView.sd_setImage(with: URL(string: avatarPath)
     }
     
     @objc private func didTapReply(){
